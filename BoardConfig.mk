@@ -111,10 +111,9 @@ BOARD_SDEXT_DEVICE := /dev/block/mmcblk1p2
 BOARD_USES_MMCUTILS := true
 BOARD_HAS_NO_MISC_PARTITION := true
 BOARD_HAS_NO_SELECT_BUTTON := true
-BOARD_CUSTOM_GRAPHICS:= ../../../device/htc/ruby/graphics.c
-BOARD_USES_RECOVERY_CHARGEMODE := true
-
-TARGET_PREBUILT_RECOVERY_KERNEL := device/htc/ruby/recovery_kernel
-BOARD_HTCBATT := device/htc/ruby/htcbatt
+BOARD_CUSTOM_GRAPHICS:= ../../../device/htc/ruby/recovery/graphics.c
+TARGET_PREBUILT_RECOVERY_KERNEL := device/htc/ruby/recovery/recovery_kernel
+TARGET_RECOVERY_INITRC := device/htc/ruby/recovery/init.rc
+#TARGET_PROVIDES_LIBRIL := vendor/htc/ruby/proprietary/lib/libril.so
 
 BOARD_NEEDS_CUTILS_LOG := true
