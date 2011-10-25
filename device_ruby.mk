@@ -31,7 +31,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_COPY_FILES += \
     device/htc/ruby/init.ruby.rc:root/init.ruby.rc \
     device/htc/ruby/init.rc:root/init.rc \
-    device/htc/ruby/init:root/init \
     device/htc/ruby/ueventd.rc:root/ueventd.rc \
     device/htc/ruby/ueventd.ruby.rc:root/ueventd.ruby.rc
 
