@@ -36,7 +36,10 @@ bin/qmiproxy
 bin/usbnet
 bin/qcks
 bin/fusermount
+bin/nl_listener
+bin/port-bridge
 xbin/wireless_modem
+xbin/uim
 etc/agps_rm
 etc/vpimg
 etc/ser2net.conf
@@ -44,6 +47,7 @@ etc/htcfs.conf
 etc/init.post_boot.sh
 etc/thermald.conf
 etc/adreno_config.txt
+lib/egl/eglsubAndroid.so
 lib/egl/libEGL_adreno200.so
 lib/egl/libGLESv1_CM_adreno200.so
 lib/egl/libGLESv2_adreno200.so
@@ -51,7 +55,9 @@ lib/egl/libq3dtools_adreno200.so
 lib/libaudioalsa.so
 lib/libpn544_fw.so
 lib/libaudcal.so
+lib/libaudcalwb.so
 lib/libC2D2.so
+lib/libcommondefs.so
 lib/libcamera.so
 lib/libcamera_client.so
 lib/libchromatix_imx105_zsl.so
@@ -122,4 +128,15 @@ lib/libpbmlib.so
 lib/libpbmlib_fusion.so
 lib/libqmi.so
 lib/libqmiservices.so
+lib/librpc.so
+lib/libmcphal.so
+lib/libnfc.so
+lib/libnv.so
+lib/libtime_remote_atom.so
+lib/libwmsts.so 
+lib/libwms.so
+lib/libuim.so
+lib/libsrsprocessing.so
+lib/hw/lights.msm8660.so
+lib/hw/gps.ruby.so
 lib/hw/sensors.ruby.so

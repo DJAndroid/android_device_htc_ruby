@@ -98,8 +98,24 @@ ro.com.google.clientidbase.ms=android-hms-tmobile-us
 ro.ril.vmail.310260=+18056377243
 ro.phone.min_match=7
 ro.ril.enable.ganlite=0
+
+# Release Bluetooth HW/SW information
+ro.bt.chipset	= Broadcom BCM4329-B1
+ro.bt.stack	= Broadcom BTL-A
+ro.bt.stack.version	= 2.0.50.032
+#0x10000010010100100000011 represent bt profile list
+ro.bt.profiles	= 4270339
+
+# Properties of BTLA stack
+service.brcm.bt.activation = 0
+service.brcm.bt.srv_active = 0
+service.brcm.bt.hcid_active = 0
+service.brcm.bt.btld = 0
+service.brcm.bt.btld_pid = 0
+service.brcm.bt.avrcp_pass_thru = 0
+service.brcm.bt.avrcp_toggle = 1
+
 # For emmc phone storage
 ro.phone_storage = 0
-
 # Make rmt_storage start at init
 ro.emmc = 1

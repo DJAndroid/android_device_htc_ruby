@@ -12,7 +12,9 @@
 ## part         - Partition # (1 based), or 'auto' for first usable partition.
 ## <sysfs_path> - List of sysfs paths to source devices
 ######################
-
+## sdcard2 is internal##
 # Mounts the first usable partition of the specified device
-dev_mount sdcard /mnt/sdcard auto /devices/platform/goldfish_mmc.0 /devices/platform/msm_sdcc.3/mmc_host/mmc1
+dev_mount sdcard /mnt/sdcard auto /devices/platform/msm_sdcc.3/mmc_host/mmc2
+dev_mount sdcard2 /mnt/sdcard/ext_sd auto /devices/platform/msm_sdcc.1/mmc_host/mmc0
+
 

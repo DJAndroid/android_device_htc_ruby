@@ -492,7 +492,7 @@ service fusermount /system/bin/fusermount -u /data/htcfs
     oneshot
 
 # umount the un-normal mount point
-service umount /system/bin/umount /data/./htcfs
+service umount umount /data/./htcfs
     disabled
     oneshot
 

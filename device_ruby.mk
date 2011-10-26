@@ -60,11 +60,11 @@ PRODUCT_PACKAGES += \
     gralloc.msm8660 \
     copybit.msm8660 \
     overlay.default \
-    gps.ruby \
     liboverlay \
-    lights.ruby \
     com.android.future.usb.accessory
 
+    # gps.ruby \
+    # lights.ruby \
     # libOmxCore \
     # libOmxVenc \
     # libOmxVdec \
@@ -129,6 +129,7 @@ PRODUCT_COPY_FILES += \
 
 # Wifi Module
 PRODUCT_COPY_FILES += \
+    device/htc/ruby/modules/kineto_gan.ko:system/lib/modules/kineto_gan.ko \
     device/htc/ruby/modules/tiap_drv.ko:system/lib/modules/tiap_drv.ko \
     device/htc/ruby/modules/tiwlan_drv.ko:system/lib/modules/tiwlan_drv.ko 
 
