@@ -34,10 +34,12 @@ WIFI_DRIVER_MODULE_PATH     := "/system/lib/modules/tiwlan_drv.ko"
 WIFI_DRIVER_MODULE_NAME     := "tiwlan_drv"
 WIFI_FIRMWARE_LOADER        := "wlan_loader"
 
+BOARD_HAS_EXTRA_SYS_PROPS := true
 BOARD_MOBILEDATA_INTERFACE_NAME := "rmnet_sdio0"
 # Audio 
 BOARD_USES_GENERIC_AUDIO := false
 BOARD_PREBUILT_LIBAUDIO := true
+#BOARD_USES_ALSA_AUDIO := true
 
 #Bluetooth
 BOARD_HAVE_BLUETOOTH := true
@@ -63,7 +65,7 @@ BOARD_USES_ADRENO_200 := true
 #BOARD_GLOBAL_CFLAGS += -DHAVE_FM_RADIO
 
 TARGET_BOOTLOADER_BOARD_NAME := ruby
-
+#TARGET_PROVIDES_LIBRIL := vendor/htc/ruby/proprietary/lib/libril.so
 #BOARD_USE_NEW_LIBRIL_HTC := true
 
 BOARD_KERNEL_CMDLINE := no_console_suspend=1
@@ -110,6 +112,6 @@ BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_CUSTOM_GRAPHICS:= ../../../device/htc/ruby/recovery/graphics.c
 TARGET_PREBUILT_RECOVERY_KERNEL := device/htc/ruby/recovery/recovery_kernel
 TARGET_RECOVERY_INITRC := device/htc/ruby/recovery/init.rc
-#TARGET_PROVIDES_LIBRIL := vendor/htc/ruby/proprietary/lib/libril.so
-
+BOARD_VOLD_EMMC_SHARES_DEV_MAJOR := true
+BOARD_VOLD_MAX_PARTITIONS := 36
 BOARD_NEEDS_CUTILS_LOG := true

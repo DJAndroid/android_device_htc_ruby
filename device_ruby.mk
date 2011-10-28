@@ -90,6 +90,7 @@ PRODUCT_COPY_FILES += \
     device/htc/ruby/wifi/hostapd.conf:system/etc/wifi/hostapd.conf \
     device/htc/ruby/wifi/tiwlan.ini:system/etc/wifi/tiwlan.ini \
     device/htc/ruby/wifi/tiwlan_ap.ini:system/etc/wifi/tiwlan_ap.ini \
+    device/htc/ruby/wifi/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
     device/htc/ruby/firmware/fmc_init_1273.2.bts:system/etc/firmware/fmc_init_1273.2.bts \
     device/htc/ruby/firmware/fm_rx_init_1273.2.bts:system/etc/firmware/fm_rx_init_1273.2.bts \
     device/htc/ruby/firmware/htc_1271fw.bin:system/etc/firmware/htc_1271fw.bin \

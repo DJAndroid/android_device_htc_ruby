@@ -119,3 +119,6 @@ service.brcm.bt.avrcp_toggle = 1
 ro.phone_storage = 0
 # Make rmt_storage start at init
 ro.emmc = 1
+# Add external mount points
+ro.additionalmounts=/mnt/emmc
+ro.vold.switchablepair=/mnt/sdcard,/mnt/emmc

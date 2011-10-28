@@ -9,11 +9,9 @@ on early-fs
     mount ext4 /dev/block/mmcblk0p30 /cache wait noatime nosuid nodev barrier=1
     mount ext4 /dev/block/mmcblk0p32 /devlog wait noatime nosuid nodev barrier=1
     
-    device /dev/block/mmcblk0p16 0460 radio diag
-
 on fs
-    devwait /dev/block/mmcblk0p17
-    rm /vendor
+    wait /dev/block/mmcblk0p17
+    rmdir /vendor
     #8x60: mount radio partition and create links for modem/q6 firmwares
     mkdir /vendor 0771 system system
     mkdir /vendor/firmware 0771 system system
@@ -41,7 +39,7 @@ on fs
     symlink /vendor/firmware/misc/modem.b00 /vendor/firmware/modem.b00
     symlink /vendor/firmware/misc/modem.mdt /vendor/firmware/modem.mdt
     mkdir /vendor/firmware/misc_mdm 0771 system system
-    devwait /dev/block/mmcblk0p18
+    wait /dev/block/mmcblk0p18
     mount vfat /dev/block/mmcblk0p18 /vendor/firmware/misc_mdm ro shortname=lower
     symlink /vendor/firmware/misc_mdm/image/amss.mbn /vendor/firmware/amss.mbn
     symlink /vendor/firmware/misc_mdm/image/dsp1.mbn /vendor/firmware/dsp1.mbn
@@ -54,12 +52,14 @@ on fs
     symlink /vendor/firmware/misc_mdm/image/htcssmem.mbn /vendor/firmware/htcssmem.mbn
 
 on init
+    #device /dev/block/mmcblk0p16 0460 radio diag
+    chmod 0777 /dev/block/mmcblk0p16
+    chown radio diag /dev/block/mmcblk0p16
+   
     wait /dev/ttyHSL1
-    mkdir /data/qcks 0770 system system
+    mkdir /data/qcks 0777 system system
 	exec /system/bin/logwrapper /system/bin/htc_ext4_fsck
 
-
-on init
     # double check the perms and set owner
     chown root root /devlog
     chmod 0700 /devlog
@@ -84,20 +84,39 @@ on init
     chown system system /dev/ewtzmu2hal
     chown system system /dev/ewtzmu2daemon
     chown system system /dev/ewtzmu2
-    
-
-
-
-    symlink /mnt/sdcard/ext_sd /sdcard2
 
 on boot
 # + SSD_RIL: Otis: from Qualcomm QMI and Netmgrd
-    mkdir /data/radio 0770 radio radio
+    mkdir /data/radio 0777 radio radio
     chown radio system /sys/module/smd_rpcrouter/parameters/debug_mask
     chown radio system /sys/module/rpcrouter_sdio_xprt/parameters/debug_mask
 # - SSD_RIL: Otis: from Qualcomm QMI and Netmgrd
     mkdir /data/d 0777 system system
     mount debugfs /data/d /data/d
+
+    chmod 0777 /dev/oncrpc
+    chmod 0777 /dev/oncrpc/00000000:0
+    chmod 0777 /dev/oncrpc/30000000:002d0000
+    chmod 0777 /dev/oncrpc/30000003:00030000
+    chmod 0777 /dev/oncrpc/3000000e:00090000
+    chmod 0777 /dev/oncrpc/30000010:00010000
+    chmod 0777 /dev/oncrpc/30000012:00040000
+    chmod 0777 /dev/oncrpc/30000014:00040000
+    chmod 0777 /dev/oncrpc/30000016:00040000
+    chmod 0777 /dev/oncrpc/30000019:000a0000
+    chmod 0777 /dev/oncrpc/3000001b:00040000
+    chmod 0777 /dev/oncrpc/3000001d:00010000
+    chmod 0777 /dev/oncrpc/3000003c:000a0000
+    chmod 0777 /dev/oncrpc/30000048:00040000
+    chmod 0777 /dev/oncrpc/3000005b:000b0000
+    chmod 0777 /dev/oncrpc/3000005f:00020000
+    chmod 0777 /dev/oncrpc/3000006b:00010000
+    chmod 0777 /dev/oncrpc/30000081:00010000
+    chmod 0777 /dev/oncrpc/30000082:00010000
+    chmod 0777 /dev/oncrpc/300000b3:00010000
+    chmod 0777 /dev/oncrpc/300000b5:00010000
+    chmod 0777 /dev/oncrpc/3000fe00:a82d4624
+    chmod 0777 /dev/oncrpc/3000fffd:00000000
 
     # bluetooth power up/down interface
     chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type
@@ -105,7 +124,7 @@ on boot
     chmod 0660                /sys/class/rfkill/rfkill0/state
 
     # give system access to wpa_supplicant.conf for backup and restore
-    mkdir /data/misc/wifi 0771 wifi wifi
+    mkdir /data/misc/wifi 0777 wifi wifi
     mkdir /data/misc/wifi/sockets 0771 wifi wifi
     mkdir /data/misc/dhcp 0777 wifi wifi
 # btips DDB location
