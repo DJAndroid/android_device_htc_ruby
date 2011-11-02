@@ -1,4 +1,5 @@
 bin/akmd
+bin/aparse
 bin/awb_camera
 bin/bma150_usr
 bin/bootcomplete
@@ -104,6 +105,8 @@ lib/libdssock.so
 lib/libdsutils.so
 lib/libdsutils.so
 lib/libewtzmu2cali.so
+lib/libfmstack.so
+lib/libfuse.so
 lib/libgemini.so
 lib/libgsl.so
 lib/libhtc_acoustic.so
