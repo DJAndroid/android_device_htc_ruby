@@ -1,6 +1,7 @@
 bin/akmd
 bin/awb_camera
 bin/bma150_usr
+bin/bootcomplete
 bin/btipsd
 bin/cam_ins_spmo
 bin/charging
@@ -36,6 +37,7 @@ bin/qmuxd
 bin/rild
 bin/rmt_storage
 bin/ser2net
+bin/shutdown
 bin/snd
 bin/snd8k
 bin/sound8x60

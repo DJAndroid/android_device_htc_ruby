@@ -142,8 +142,7 @@ PRODUCT_COPY_FILES += \
 # we have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise
 
-# device uses high-density artwork where available
-PRODUCT_LOCALES += hdpi
+
 
 PRODUCT_COPY_FILES += \
     device/htc/ruby/vold.fstab:system/etc/vold.fstab
@@ -177,6 +176,9 @@ $(call inherit-product, device/htc/ruby/media_htcaudio.mk)
 $(call inherit-product, device/htc/common/common.mk)
 
 $(call inherit-product, build/target/product/full_base.mk)
+
+# device uses high-density artwork where available
+PRODUCT_LOCALES += hdpi
 
 PRODUCT_NAME := full_ruby
 PRODUCT_DEVICE := ruby

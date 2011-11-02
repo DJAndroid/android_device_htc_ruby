@@ -9,9 +9,9 @@ on early-fs
     mount ext4 /dev/block/mmcblk0p30 /cache wait noatime nosuid nodev barrier=1
     mount ext4 /dev/block/mmcblk0p32 /devlog wait noatime nosuid nodev barrier=1
     
-on fs
+
     wait /dev/block/mmcblk0p17
-    rmdir /vendor
+    #rmdir /vendor
     #8x60: mount radio partition and create links for modem/q6 firmwares
     mkdir /vendor 0771 system system
     mkdir /vendor/firmware 0771 system system
@@ -51,15 +51,35 @@ on fs
     symlink /vendor/firmware/misc_mdm/image/amss.mbn /vendor/firmware/amss.mbn
     symlink /vendor/firmware/misc_mdm/image/htcssmem.mbn /vendor/firmware/htcssmem.mbn
 
-on init
-    #device /dev/block/mmcblk0p16 0460 radio diag
-    chmod 0777 /dev/block/mmcblk0p16
-    chown radio diag /dev/block/mmcblk0p16
-   
+    
+    mkdir /data/tombstones/mdm 0744 radio system
+    chown radio system /data/tombstones/mdm
+
+on post-fs   
     wait /dev/ttyHSL1
     mkdir /data/qcks 0777 system system
-	exec /system/bin/logwrapper /system/bin/htc_ext4_fsck
+	#exec /system/bin/logwrapper /system/bin/htc_ext4_fsck
 
+    #device /dev/block/mmcblk0p16 0460 radio diag
+    chown radio diag /dev/block/mmcblk0p16
+    chmod 0777 /dev/block/mmcblk0p16
+
+# Force loading of modem and Q6 images
+service load-modem /system/bin/load-modem.sh
+    oneshot
+
+# for modem link
+on property:service.modem.enable=1
+	start modem
+
+# for modem link
+on property:service.modem.enable=0
+	stop modem
+
+service kickstart /system/bin/qcks l
+    oneshot
+
+on init
     # double check the perms and set owner
     chown root root /devlog
     chmod 0700 /devlog
@@ -198,12 +218,6 @@ on boot
     setprop net.tcp.buffersize.gprs    4096,174760,1572864,4096,8760,11680
 # - SSD_RIL : Enlarge TCP window size for HSDPA Cat 14
 
-# Force loading of modem and Q6 images
-service load-modem /system/bin/load-modem.sh
-    oneshot
-
-service kickstart /system/bin/qcks l
-    oneshot
 
 service uim /system/xbin/uim
 	user root
@@ -337,13 +351,7 @@ service modem /system/xbin/wireless_modem
     group system radio
     disabled
 
-# for modem link
-on property:service.modem.enable=1
-	start modem
 
-# for modem link
-on property:service.modem.enable=0
-	stop modem
 
 service zchgd_offmode /system/bin/zchgd -pseudooffmode
     user root
@@ -362,11 +370,11 @@ on property:ro.use_data_netmgrd=false
     # netmgr not supported on specific target
     stop netmgrd
 
-service ril-daemon /system/bin/rild
-    socket rild stream 660 root radio
-    socket rild-debug stream 660 radio system
-    user root
-    group radio cache inet misc audio qcom_oncrpc diag system
+#service ril-daemon /system/bin/rild
+#    socket rild stream 660 root radio
+#    socket rild-debug stream 660 radio system
+#    user root
+#    group radio cache inet misc audio qcom_oncrpc diag system
 
 #-HTC_RIL: from QCT Fusion
 

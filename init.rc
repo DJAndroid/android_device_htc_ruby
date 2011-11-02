@@ -137,8 +137,10 @@ on post-fs
     write /proc/apanic_console 1
 
     # Same reason as /data above
+    mkdir /cache/download
     chown system cache /cache
     chmod 0771 /cache
+    chmod 0777 /cache/download
 
     # This may have been created by the recovery system with odd permissions
     chown system cache /cache/recovery
@@ -288,9 +290,9 @@ on boot
     chown system system /sys/camera_led_status/led_hotspot_status
     chown media system /sys/android_camera/cam_mode
     chown radio system /sys/class/cap_sense/sar/sleep
-    chmod 0660 /sys/power/state
-    chmod 0660 /sys/power/wake_lock
-    chmod 0660 /sys/power/wake_unlock
+    chmod 0770 /sys/power/state
+    chmod 0770 /sys/power/wake_lock
+    chmod 0770 /sys/power/wake_unlock
     chown system system /sys/camera_led_status/led_hotspot_status
     chown system system /sys/class/timed_output/vibrator/enable
     chown system system /sys/class/leds/flashlight/brightness
@@ -350,9 +352,9 @@ on boot
 
 #set radio_feedback permissions
     chown radio radio /dev/radio_feedback
-    chmod 0660 /dev/radio_feedback
+    chmod 0777 /dev/radio_feedback
     chown radio radio /dev/sdiotty0
-    chmod 0660 /dev/sdiotty0
+    chmod 0777 /dev/sdiotty0
 
 #set G-Sensor and Compass permissions
     chown compass system /dev/akm8976_aot
@@ -383,11 +385,11 @@ on boot
     chown radio radio /dev/htcdiag
     chown radio radio /dev/diag_arm9
     chown radio radio /dev/btdiag
-    chmod 0660 /dev/diag
-    chmod 0660 /dev/diag_mdm
-    chmod 0660 /dev/htcdiag
-    chmod 0660 /dev/diag_arm9
-    chmod 0660 /dev/btdiag
+    chmod 0770 /dev/diag
+    chmod 0770 /dev/diag_mdm
+    chmod 0770 /dev/htcdiag
+    chmod 0770 /dev/diag_arm9
+    chmod 0770 /dev/btdiag
 
 # Define TCP buffer sizes for various networks
 #   ReadMin, ReadInitial, ReadMax, WriteMin, WriteInitial, WriteMax,
@@ -458,13 +460,13 @@ service netd /system/bin/netd
 service debuggerd /system/bin/debuggerd
 
 service ril-daemon /system/bin/rild
-    socket rild stream 660 root radio
-    socket rild-debug stream 660 radio system
-    socket rild-htc stream 660 radio system
-    socket rild-htc-dmagent stream 660 radio system
-    socket rild-htc-simapi stream 660 radio system
+    socket rild stream 770 root radio
+    socket rild-debug stream 770 radio system
+    socket rild-htc stream 770 radio system
+    socket rild-htc-dmagent stream 770 radio system
+    socket rild-htc-simapi stream 770 radio system
     user root
-    group radio cache inet misc audio sdcard_rw
+    group radio cache inet misc audio sdcard_rw qcom_oncrpc diag system
 
 service ril-ims-daemon /system/bin/rild_ims
     socket rild-ims stream 660 root radio
@@ -494,7 +496,7 @@ service fusermount /system/bin/fusermount -u /data/htcfs
     oneshot
 
 # umount the un-normal mount point
-service umount umount /data/./htcfs
+service umount /system/bin/umount /data/./htcfs
     disabled
     oneshot
 
